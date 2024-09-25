@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "name": "Slack",
+    "img": "https://framerusercontent.com/images/kPOqZdoOGogHuRhGNXyvqqPzIDc.svg",
+    "checked": true
+  },
+  {
+    "id": 2,
+    "name": "GSuite",
+    "img": "https://framerusercontent.com/images/6A5ndvtug4OU3TGN0Nprww1BziU.svg",
+    "checked": true
+  },
+  {
+    "id": 3,
+    "name": "Teams",
+    "img": "https://framerusercontent.com/images/9Vw1WxTOtO7n7jyxq8x6mQwY7C0.svg",
+    "checked": false
+  },
+  {
+    "id": 4,
+    "name": "Zoom",
+    "img": "https://framerusercontent.com/images/BTuVQA85vPQaIDf5B0f7miiy3r4.svg",
+    "checked": true
+  },
+  {
+    "id": 5,
+    "name": "Notion",
+    "img": "https://framerusercontent.com/images/fCXfKJfB0qLDhd7n5tv8edAqVkE.svg",
+    "checked": false
+  },
+  {
+    "id": 6,
+    "name": "Airtable",
+    "img": "https://framerusercontent.com/images/1nzDJfBPTORWt9O8CajHSYrQR8.svg",
+    "checked": false
+  },
+  {
+    "id": 7,
+    "name": "Trello",
+    "img": "https://framerusercontent.com/images/B7RvnKct5wyqfwgpv4U5BQtJHGE.svg",
+    "checked": false
+  },
+  {
+    "id": 8,
+    "name": "Asana",
+    "img": "https://framerusercontent.com/images/2ODSfmr9SXc1CZpFkNqpu7IyqY.svg",
+    "checked": false
+  },
+  {
+    "id": 9,
+    "name": "Monday",
+    "img": "https://framerusercontent.com/images/e44DJtBWm0UQdkhmcOqKRtD3n8.svg",
+    "checked": false
+  },
+  {
+    "id": 10,
+    "name": "Clickup",
+    "img": "https://framerusercontent.com/images/ZdjR39kAdc94rZZdz4PrnZa8sY.svg",
+    "checked": false
+  },
+  {
+    "id": 11,
+    "name": "Webex",
+    "img": "https://framerusercontent.com/images/u8c9OZARmnNRemwY72KsJqoWDRs.svg",
+    "checked": false
+  }
+]
