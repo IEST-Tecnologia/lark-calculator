@@ -73,8 +73,6 @@ function App() {
     return sliderValue * (80 * checkedCount - costLark) * 12;
   }, [sliderValue, checkedCount, costLark]);
 
-  const [totalSavings, setTotalSavings] = useState<number>(valueSavings);
-
   const getStep = () => {
     if (sliderValue < 10) {
       return 1;
@@ -128,10 +126,6 @@ function App() {
     const count = filteredTools.filter((tool) => tool.checked).length;
     setCheckedCount(count);
   }, [filteredTools]);
-
-  useEffect(() => {
-    setTotalSavings(valueSavings);
-  }, [sliderValue, filteredTools, valueSavings]);
 
   return (
     <>
@@ -289,7 +283,7 @@ function App() {
                       <p className="m-0 font-bold text-3xl text-[#3370FF]">
                         Economize{" "}
                         <span className="ml-2">
-                          R$ {totalSavings.toLocaleString()}
+                          R$ {valueSavings.toLocaleString()}
                         </span>
                         <span className="text-2xl leading-8 font-bold bg-gradient-to-r from-[#3370FF] to-[#24C4FF] bg-clip-text text-transparent">
                           /ano
@@ -300,7 +294,7 @@ function App() {
                       <p className="font-medium leading-8 text-[#646A73] text-lg">
                         Para uma empresa com {sliderValue} colaboradores o Lark
                         pode economizar um custo total de pelo menos R$
-                        {totalSavings.toLocaleString()} por ano.
+                        {valueSavings.toLocaleString()} por ano.
                       </p>
                     </div>
                     <div className="self-stretch py-3 px-10 bg-gradient-to-r from-[#3370FF] to-[#4E83FD] font-medium text-base leading-6 text-center text-white mt-10 rounded-full">
