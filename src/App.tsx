@@ -264,14 +264,14 @@ function App() {
                 </div>
                 <div className="flex flex-col gap-4 lg:gap-10">
                   <div className="flex">
-                    <div className="flex text-[#3370FF] font-bold text-[36px] leading-[36px]">
+                    <div className="flex text-[#3370FF] font-bold text-[32px] leading-[36px]">
                       <div className="flex w-fit relative items-baseline my-[0.1em]">
                         <div className="relative flex mr-[0.2em] overflow-hidden h-[32px] transition-all duration-1000 ease-in-out">
                           <NumberScroll value={checkedCount} />
                         </div>
                       </div>
                     </div>
-                    <p className="inline-block m-0 font-bold text-2xl lg:text-4xl leading-[36px] bg-gradient-to-r from-[#3370FF] to-[#24C4FF] bg-clip-text text-transparent">
+                    <p className="inline-block m-0 font-bold text-[32px] leading-[36px] bg-gradient-to-r from-[#3370FF] to-[#24C4FF] bg-clip-text text-transparent">
                       apps
                     </p>
                   </div>
@@ -291,7 +291,7 @@ function App() {
                   </div>
                   <div className="flex flex-col">
                     <div className="mb-3">
-                      <p className="m-0 font-bold text-2xl lg:text-3xl text-[#3370FF] flex flex-wrap">
+                      <p className="m-0 font-bold text-[22px] text-[#3370FF] flex flex-wrap">
                         Economize{" "}
                         <span className="ml-2 flex items-center gap-1">
                           R$
@@ -299,7 +299,7 @@ function App() {
                             <NumberScroll value={valueSavings} />
                           </div>
                         </span>
-                        <span className="text-2xl leading-8 font-bold bg-gradient-to-r from-[#3370FF] to-[#24C4FF] bg-clip-text text-transparent">
+                        <span className="text-[22px] leading-8 font-bold bg-gradient-to-r from-[#3370FF] to-[#24C4FF] bg-clip-text text-transparent">
                           /ano
                         </span>
                       </p>
