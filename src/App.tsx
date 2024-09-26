@@ -1,4 +1,4 @@
-import { SVGAttributes, useEffect, useState } from "react";
+import { SVGAttributes, useEffect, useMemo, useState } from "react";
 import tools from "./tools.json";
 import { Slider } from "@mui/material";
 import Tooltip from "./Tooltip";
@@ -69,10 +69,11 @@ function App() {
   const [sliderValue, setSliderValue] = useState(100);
   const costLark = sliderValue <= 50 ? 0 : sliderValue <= 500 ? 90 : 150;
 
-  const calculateSavings = () => {
+  const valueSavings = useMemo(() => {
     return sliderValue * (80 * checkedCount - costLark) * 12;
-  };
-  const [totalSavings, setTotalSavings] = useState<number>(calculateSavings());
+  }, [sliderValue, checkedCount, costLark]);
+
+  const [totalSavings, setTotalSavings] = useState<number>(valueSavings);
 
   const getStep = () => {
     if (sliderValue < 10) {
@@ -84,7 +85,7 @@ function App() {
     }
   };
 
-  function handleSliderChange(event: Event, newValue: number | number[]) {
+  function handleSliderChange(_: Event, newValue: number | number[]) {
     if (typeof newValue === "number") {
       const modifiedValue =
         newValue < 10 ? newValue : Math.floor(newValue / 10) * 10;
@@ -129,8 +130,8 @@ function App() {
   }, [filteredTools]);
 
   useEffect(() => {
-    setTotalSavings(calculateSavings());
-  }, [sliderValue, filteredTools]);
+    setTotalSavings(valueSavings);
+  }, [sliderValue, filteredTools, valueSavings]);
 
   return (
     <>
