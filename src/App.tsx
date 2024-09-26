@@ -15,7 +15,7 @@ const DigitScroll = ({ digit }: { digit: number }) => {
 
   return (
     <div
-      className="transform transition-all duration-1000 flex text-center flex-col opacity-100 shrink-0 lg:w-[22px] leading-8"
+      className="transform transition-all duration-1000 flex text-center flex-col opacity-100 shrink-0  lg:w-[18px] leading-8"
       style={{ transform: `translateY(${translateY}px)` }}
     >
       <div>0</div>
@@ -32,14 +32,23 @@ const DigitScroll = ({ digit }: { digit: number }) => {
   );
 };
 
-const NumberScroll = ({ checkedCount }: { checkedCount: number }) => {
-  const digits = String(checkedCount).split("").map(Number);
+const NumberScroll = ({ value }: { value: number }) => {
+  // Formatar o número com separador de milhares (ponto)
+  const formattedNumber = new Intl.NumberFormat("pt-BR").format(value);
+
+  const characters = formattedNumber.split("");
 
   return (
     <div className="flex">
-      {digits.map((digit, index) => (
-        <DigitScroll key={index} digit={digit} />
-      ))}
+      {characters.map((char, index) =>
+        !isNaN(Number(char)) ? (
+          <DigitScroll key={index} digit={Number(char)} />
+        ) : (
+          <div key={index} className="lg:w-[18px] leading-8 text-center">
+            {char}
+          </div>
+        )
+      )}
     </div>
   );
 };
@@ -72,6 +81,8 @@ function App() {
   const valueSavings = useMemo(() => {
     return sliderValue * (80 * checkedCount - costLark) * 12;
   }, [sliderValue, checkedCount, costLark]);
+
+  console.log(valueSavings);
 
   const getStep = () => {
     if (sliderValue < 10) {
@@ -245,7 +256,7 @@ function App() {
               </div>
             </div>
             <div className="w-full lg:w-[40%]">
-              <div className="flex flex-col justify-around bg-white shadow-sm rounded-3xl py-10 px-2 lg:pt-20 lg:min-h-[646px] relative">
+              <div className="flex flex-col justify-around bg-white shadow-sm rounded-3xl py-10 px-2 lg:px-10 lg:pt-20 lg:min-h-[646px] relative">
                 <div className="absolute top-[-25px] lg:top-[-44px] self-center">
                   <div className="pt-1 pl-2 lg:pt-5 lg:pl-4 w-[60px] h-[60px] lg:w-[88px] lg:h-[88px] bg-white shadow-md rounded-xl">
                     <LarkIcon className="w-[50px] h-[55px] lg:w-[67px] lg:h-[54px]" />
@@ -256,7 +267,7 @@ function App() {
                     <div className="flex text-[#3370FF] font-bold text-[36px] leading-[36px]">
                       <div className="flex w-fit relative items-baseline my-[0.1em]">
                         <div className="relative flex mr-[0.2em] overflow-hidden h-[32px] transition-all duration-1000 ease-in-out">
-                          <NumberScroll checkedCount={checkedCount} />
+                          <NumberScroll value={checkedCount} />
                         </div>
                       </div>
                     </div>
@@ -280,10 +291,13 @@ function App() {
                   </div>
                   <div className="flex flex-col">
                     <div className="mb-3">
-                      <p className="m-0 font-bold text-2xl lg:text-3xl text-[#3370FF]">
+                      <p className="m-0 font-bold text-2xl lg:text-3xl text-[#3370FF] flex flex-wrap">
                         Economize{" "}
-                        <span className="ml-2">
-                          R$ {valueSavings.toLocaleString()}
+                        <span className="ml-2 flex items-center gap-1">
+                          R$
+                          <div className="relative flex mr-[0.2em] overflow-hidden h-[32px] transition-all duration-1000 ease-in-out">
+                            <NumberScroll value={valueSavings} />
+                          </div>
                         </span>
                         <span className="text-2xl leading-8 font-bold bg-gradient-to-r from-[#3370FF] to-[#24C4FF] bg-clip-text text-transparent">
                           /ano
