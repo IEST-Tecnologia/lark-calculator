@@ -129,7 +129,7 @@ function App() {
 
   return (
     <>
-      <div className="flex items-center content-center flex-none flex-row flex-wrap gap-[10px] min-h-min justify-center overflow-hidden p-20 relative w-full">
+      <div className="flex items-center content-center flex-none flex-row flex-wrap gap-[10px] min-h-min justify-center overflow-hidden p-10 lg:p-20 relative w-full">
         <div className="absolute top-0 bottom-0 left-0 right-0">
           <img
             className="block w-full h-full object-cover object-center"
@@ -138,8 +138,8 @@ function App() {
           />
         </div>
         <div className="flex-none h-auto max-w-full relative w-auto">
-          <div className="flex items-end justify-between max-w-[1320px]">
-            <div className="flex flex-col w-[54%]">
+          <div className="flex flex-col gap-y-10 lg:flex-row items-end justify-between max-w-[1320px]">
+            <div className="flex flex-col w-full lg:w-[54%]">
               <p className="font-bold text-4xl relative pr-[60px] leading-10">
                 Corte gastos com Lark.
               </p>
@@ -150,7 +150,7 @@ function App() {
                 Cálculo baseado em estudos de caso reais de clientes do Lark
               </p>
               <div className="flex flex-col bg-white shadow-sm rounded-xl relative">
-                <div className="absolute top-[-89px] right-[-45px]">
+                <div className="absolute top-[-89px] right-[-45px] hidden lg:block">
                   <ArrowIcon />
                 </div>
                 <p className="m-10 ml-10 font-medium text-lg leading-7">
@@ -244,9 +244,9 @@ function App() {
                 </div>
               </div>
             </div>
-            <div className="w-[40%]">
-              <div className="flex flex-col justify-around bg-white shadow-sm rounded-3xl p-10 pt-20 min-h-[646px]">
-                <div className="absolute top-[-44px] self-center">
+            <div className="w-full lg:w-[40%]">
+              <div className="flex flex-col justify-around bg-white shadow-sm rounded-3xl p-10 lg:pt-20 lg:min-h-[646px] relative">
+                <div className="absolute top-[-30px] lg:top-[-44px] self-center">
                   <div className="pt-5 pl-4 w-[88px] h-[88px] bg-white shadow-sm rounded-xl">
                     <LarkIcon />
                   </div>
