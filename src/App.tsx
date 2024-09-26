@@ -129,7 +129,7 @@ function App() {
 
   return (
     <>
-      <div className="flex items-center content-center flex-none flex-row flex-wrap gap-[10px] min-h-min justify-center overflow-hidden p-10 lg:p-20 relative w-full">
+      <div className="flex items-center content-center flex-none flex-row flex-wrap gap-[10px] min-h-min justify-center overflow-hidden p-4 lg:p-20 relative w-full">
         <div className="absolute top-0 bottom-0 left-0 right-0">
           <img
             className="block w-full h-full object-cover object-center"
@@ -245,7 +245,7 @@ function App() {
               </div>
             </div>
             <div className="w-full lg:w-[40%]">
-              <div className="flex flex-col justify-around bg-white shadow-sm rounded-3xl p-10 lg:pt-20 lg:min-h-[646px] relative">
+              <div className="flex flex-col justify-around bg-white shadow-sm rounded-3xl py-10 px-2 lg:pt-20 lg:min-h-[646px] relative">
                 <div className="absolute top-[-25px] lg:top-[-44px] self-center">
                   <div className="pt-1 pl-2 lg:pt-5 lg:pl-4 w-[60px] h-[60px] lg:w-[88px] lg:h-[88px] bg-white shadow-md rounded-xl">
                     <LarkIcon className="w-[50px] h-[55px] lg:w-[67px] lg:h-[54px]" />
