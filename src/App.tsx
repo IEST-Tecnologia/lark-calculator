@@ -133,7 +133,7 @@ function App() {
         <div className="absolute top-0 bottom-0 left-0 right-0">
           <img
             className="block w-full h-full object-cover object-center"
-            src="/bg-calculator.jpeg"
+            src="./bg-calculator.jpeg"
             alt="Imagem de fundo"
           />
         </div>
