@@ -15,7 +15,7 @@ const DigitScroll = ({ digit }: { digit: number }) => {
 
   return (
     <div
-      className="transform transition-all duration-1000 flex text-center flex-col opacity-100 shrink-0 w-[22px] leading-8"
+      className="transform transition-all duration-1000 flex text-center flex-col opacity-100 shrink-0 lg:w-[22px] leading-8"
       style={{ transform: `translateY(${translateY}px)` }}
     >
       <div>0</div>
@@ -140,24 +140,24 @@ function App() {
         <div className="flex-none h-auto max-w-full relative w-auto">
           <div className="flex flex-col gap-y-10 lg:flex-row items-end justify-between max-w-[1320px]">
             <div className="flex flex-col w-full lg:w-[54%]">
-              <p className="font-bold text-4xl relative pr-[60px] leading-10">
+              <p className="font-bold text-2xl lg:text-4xl relative lg:pr-[60px] leading-7">
                 Corte gastos com Lark.
               </p>
-              <p className="font-bold text-4xl relative pr-[60px] leading-10 mb-3">
+              <p className="font-bold text-2xl lg:text-4xl relative lg:pr-[60px] leading-7 mb-3">
                 Faça mais com menos.
               </p>
-              <p className="font-normal mb-8 text-base relative pr-[60px] leading-10">
+              <p className="font-normal mb-8 text-base relative pr-[60px] lg:leading-10">
                 Cálculo baseado em estudos de caso reais de clientes do Lark
               </p>
               <div className="flex flex-col bg-white shadow-sm rounded-xl relative">
                 <div className="absolute top-[-89px] right-[-45px] hidden lg:block">
                   <ArrowIcon />
                 </div>
-                <p className="m-10 ml-10 font-medium text-lg leading-7">
+                <p className="m-4 lg:m-10 font-medium text-base lg:text-lg leading-7">
                   Qual a quantidade de colaboradores na sua empresa?
                 </p>
 
-                <div className="flex flex-col items-center px-14 mt-4 mb-4">
+                <div className="flex flex-col items-center px-5 lg:px-14 mt-4 mb-4">
                   <Slider
                     value={sliderValue}
                     getAriaValueText={valuetext}
@@ -205,7 +205,7 @@ function App() {
                 </div>
 
                 <div className="mt-8 mb-8 bg-gray-300 h-[1px]"></div>
-                <p className="ml-10 font-medium text-lg leading-4">
+                <p className=" ml-4 lg:ml-10 font-medium text-base lg:text-lg leading-4">
                   Quais ferramentas você usa?
                 </p>
                 {checkedCount < 3 && (
@@ -216,7 +216,7 @@ function App() {
                     </p>
                   </div>
                 )}
-                <div className="flex flex-wrap px-[30px] pt-[30px] pb-[14px]">
+                <div className="flex justify-center lg:justify-start flex-wrap px-3 lg:px-[30px] pt-[30px] pb-[14px]">
                   {filteredTools.map((tool: Tool) => (
                     <div
                       className="py-3 px-[10px] relative"
@@ -246,12 +246,12 @@ function App() {
             </div>
             <div className="w-full lg:w-[40%]">
               <div className="flex flex-col justify-around bg-white shadow-sm rounded-3xl p-10 lg:pt-20 lg:min-h-[646px] relative">
-                <div className="absolute top-[-30px] lg:top-[-44px] self-center">
-                  <div className="pt-5 pl-4 w-[88px] h-[88px] bg-white shadow-sm rounded-xl">
-                    <LarkIcon />
+                <div className="absolute top-[-25px] lg:top-[-44px] self-center">
+                  <div className="pt-1 pl-2 lg:pt-5 lg:pl-4 w-[60px] h-[60px] lg:w-[88px] lg:h-[88px] bg-white shadow-md rounded-xl">
+                    <LarkIcon className="w-[50px] h-[55px] lg:w-[67px] lg:h-[54px]" />
                   </div>
                 </div>
-                <div className="flex flex-col gap-10">
+                <div className="flex flex-col gap-4 lg:gap-10">
                   <div className="flex">
                     <div className="flex text-[#3370FF] font-bold text-[36px] leading-[36px]">
                       <div className="flex w-fit relative items-baseline my-[0.1em]">
@@ -260,12 +260,12 @@ function App() {
                         </div>
                       </div>
                     </div>
-                    <p className="inline-block m-0 font-bold text-[36px] leading-[36px] bg-gradient-to-r from-[#3370FF] to-[#24C4FF] bg-clip-text text-transparent">
+                    <p className="inline-block m-0 font-bold text-2xl lg:text-4xl leading-[36px] bg-gradient-to-r from-[#3370FF] to-[#24C4FF] bg-clip-text text-transparent">
                       apps
                     </p>
                   </div>
                   <div className="mt-3">
-                    <p className="font-medium text-lg leading-8 text-[#646A73] inline pr-2">
+                    <p className="font-medium text-base lg:text-lg leading-8 text-[#646A73] inline pr-2">
                       Estima-se que o{" "}
                       <span className="p-2 bg-gradient-to-r from-[#3370FF] to-[#24C4FF] rounded-full font-bold text-base text-white">
                         {sliderValue <= 50
@@ -280,7 +280,7 @@ function App() {
                   </div>
                   <div className="flex flex-col">
                     <div className="mb-3">
-                      <p className="m-0 font-bold text-3xl text-[#3370FF]">
+                      <p className="m-0 font-bold text-2xl lg:text-3xl text-[#3370FF]">
                         Economize{" "}
                         <span className="ml-2">
                           R$ {valueSavings.toLocaleString()}
@@ -291,14 +291,21 @@ function App() {
                       </p>
                     </div>
                     <div>
-                      <p className="font-medium leading-8 text-[#646A73] text-lg">
+                      <p className="font-medium leading-8 text-[#646A73] text-base lg:text-lg">
                         Para uma empresa com {sliderValue} colaboradores o Lark
                         pode economizar um custo total de pelo menos R$
                         {valueSavings.toLocaleString()} por ano.
                       </p>
                     </div>
-                    <div className="self-stretch py-3 px-10 bg-gradient-to-r from-[#3370FF] to-[#4E83FD] font-medium text-base leading-6 text-center text-white mt-10 rounded-full">
-                      Começe a economizar com Lark hoje.
+                    <div className="mt-10">
+                      <a
+                        className="self-stretch  font-medium text-base leading-6 text-center text-white rounded-full w-full"
+                        href="https://iestgroup.larksuite.com/share/base/form/shruseb6ADHU8jd5GSJPD9b4tVe"
+                      >
+                        <p className="bg-gradient-to-r from-[#3370FF] to-[#4E83FD] py-3 px-2 lg:px-10 rounded-full">
+                          Começe a economizar com Lark hoje.
+                        </p>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -416,8 +423,6 @@ export function LarkIcon({
 }: SVGAttributes<SVGSVGElement>) {
   return (
     <svg
-      width="67"
-      height="54"
       viewBox="0 0 67 54"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
