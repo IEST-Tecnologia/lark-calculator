@@ -1,6 +1,7 @@
 import { SVGAttributes, useEffect, useState } from "react";
 import tools from "./tools.json";
 import { Slider } from "@mui/material";
+import Tooltip from "./Tooltip";
 
 interface Tool {
   id: number;
@@ -66,15 +67,11 @@ function App() {
   const [filteredTools, setFilteredTools] = useState<Tool[]>(tools);
   const [checkedCount, setCheckedCount] = useState<number>(3);
   const [sliderValue, setSliderValue] = useState(100);
-  const costPerCollaborator = 132;
+  const costLark = sliderValue <= 50 ? 0 : sliderValue <= 500 ? 90 : 150;
 
   const calculateSavings = () => {
-    const checkedToolsCount = filteredTools.filter(
-      (tool) => tool.checked
-    ).length; // Conta as ferramentas selecionadas
-    return sliderValue * checkedToolsCount * costPerCollaborator; // Cálculo do valor total
+    return sliderValue * (80 * checkedCount - costLark) * 12;
   };
-
   const [totalSavings, setTotalSavings] = useState<number>(calculateSavings());
 
   const getStep = () => {
@@ -89,7 +86,8 @@ function App() {
 
   function handleSliderChange(event: Event, newValue: number | number[]) {
     if (typeof newValue === "number") {
-      const modifiedValue = Math.floor(newValue / 10) * 10;
+      const modifiedValue =
+        newValue < 10 ? newValue : Math.floor(newValue / 10) * 10;
       setSliderValue(modifiedValue);
     }
   }
@@ -99,11 +97,30 @@ function App() {
   }
 
   const handleToolClick = (id: number) => {
-    setFilteredTools((prevTools) =>
-      prevTools.map(
-        (tool) => (tool.id === id ? { ...tool, checked: !tool.checked } : tool) // Altera somente o tool com o id clicado
-      )
-    );
+    setFilteredTools((prevTools) => {
+      let selectedCount = checkedCount;
+
+      const updatedTools = prevTools.map((tool) => {
+        if (tool.id === id) {
+          if (tool.checked && selectedCount < 3) {
+            return tool;
+          }
+
+          const updatedTool = { ...tool, checked: !tool.checked };
+          if (updatedTool.checked) {
+            selectedCount += 1;
+          } else {
+            selectedCount -= 1;
+          }
+
+          return updatedTool;
+        }
+        return tool;
+      });
+
+      setCheckedCount(selectedCount);
+      return updatedTools;
+    });
   };
 
   useEffect(() => {
@@ -183,6 +200,11 @@ function App() {
                       "& .MuiSlider-markLabel": {
                         fontSize: "0.75rem",
                       },
+                      "& .MuiSlider-valueLabel": {
+                        backgroundColor: "#111827",
+                        color: "#fff",
+                        borderRadius: "12px",
+                      },
                     }}
                   />
                 </div>
@@ -191,27 +213,37 @@ function App() {
                 <p className="ml-10 font-medium text-lg leading-4">
                   Quais ferramentas você usa?
                 </p>
+                {checkedCount < 3 && (
+                  <div className="mt-4 mx-10">
+                    <p className="py-2 px-4 bg-[#feead2] flex rounded-md items-center gap-2 text-sm font-semibold">
+                      <AlertIcon /> Selecione pelo menos 2 opções para um
+                      cálculo preciso.
+                    </p>
+                  </div>
+                )}
                 <div className="flex flex-wrap px-[30px] pt-[30px] pb-[14px]">
                   {filteredTools.map((tool: Tool) => (
                     <div
-                      className="py-3 px-[10px]"
+                      className="py-3 px-[10px] relative"
                       key={tool.id}
                       onClick={() => handleToolClick(tool.id)}
                     >
-                      <div
-                        className={`flex justify-center items-center relative w-16 h-16 bg-transparent shadow rounded-xl border ${
-                          tool.checked ? "border-[#3370FF]" : ""
-                        }`}
-                      >
-                        <div className="relative">
-                          <img src={tool.img} alt={tool.name} />
-                        </div>
-                        {tool.checked && (
-                          <div className="absolute top-[-12px] right-[-12px]">
-                            <CheckBlueIcon />
+                      <Tooltip orientation="top" text={tool.name}>
+                        <div
+                          className={`flex justify-center items-center relative w-16 h-16 bg-transparent shadow rounded-xl border ${
+                            tool.checked ? "border-[#3370FF]" : ""
+                          }`}
+                        >
+                          <div className="relative">
+                            <img src={tool.img} alt={tool.name} />
                           </div>
-                        )}
-                      </div>
+                          {tool.checked && (
+                            <div className="absolute top-[-12px] right-[-12px]">
+                              <CheckBlueIcon />
+                            </div>
+                          )}
+                        </div>
+                      </Tooltip>
                     </div>
                   ))}
                 </div>
@@ -241,10 +273,14 @@ function App() {
                     <p className="font-medium text-lg leading-8 text-[#646A73] inline pr-2">
                       Estima-se que o{" "}
                       <span className="p-2 bg-gradient-to-r from-[#3370FF] to-[#24C4FF] rounded-full font-bold text-base text-white">
-                        Lark Pro
+                        {sliderValue <= 50
+                          ? "Lark Básico"
+                          : sliderValue <= 500
+                          ? "Lark Pro"
+                          : "Lark Enterprise"}
                       </span>{" "}
-                      possa substituir e complementar pelo menos 3 de suas
-                      ferramentas de negócios existentes.
+                      possa substituir e complementar pelo menos {checkedCount}{" "}
+                      de suas ferramentas de negócios existentes.
                     </p>
                   </div>
                   <div className="flex flex-col">
@@ -252,7 +288,7 @@ function App() {
                       <p className="m-0 font-bold text-3xl text-[#3370FF]">
                         Economize{" "}
                         <span className="ml-2">
-                          $ {totalSavings.toLocaleString()}
+                          R$ {totalSavings.toLocaleString()}
                         </span>
                         <span className="text-2xl leading-8 font-bold bg-gradient-to-r from-[#3370FF] to-[#24C4FF] bg-clip-text text-transparent">
                           /ano
@@ -262,8 +298,8 @@ function App() {
                     <div>
                       <p className="font-medium leading-8 text-[#646A73] text-lg">
                         Para uma empresa com {sliderValue} colaboradores o Lark
-                        pode economizar um custo total de pelo menos U$ 100,000
-                        por ano.
+                        pode economizar um custo total de pelo menos R$
+                        {totalSavings.toLocaleString()} por ano.
                       </p>
                     </div>
                     <div className="self-stretch py-3 px-10 bg-gradient-to-r from-[#3370FF] to-[#4E83FD] font-medium text-base leading-6 text-center text-white mt-10 rounded-full">
@@ -312,6 +348,43 @@ export function ArrowIcon({
           <stop stopColor="#3370FF" stopOpacity="0.5"></stop>
           <stop offset="1" stopColor="#01D5BA" stopOpacity="0"></stop>
         </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
+export function AlertIcon({
+  className,
+  ...props
+}: SVGAttributes<SVGSVGElement>) {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      className={"text-white " + className}
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g clipPath="url(#clip0_333_1864)">
+        <path
+          d="M8 15.3333C12.0501 15.3333 15.3333 12.05 15.3333 7.99996C15.3333 3.94987 12.0501 0.666626 8 0.666626C3.94991 0.666626 0.666664 3.94987 0.666664 7.99996C0.666664 12.05 3.94991 15.3333 8 15.3333Z"
+          fill="#FF8800"
+        ></path>
+        <path
+          d="M8 4.66663C7.63181 4.66663 7.33334 4.9651 7.33334 5.33329V8.66663C7.33334 9.03482 7.63181 9.33329 8 9.33329C8.36819 9.33329 8.66667 9.03482 8.66667 8.66663V5.33329C8.66667 4.9651 8.36819 4.66663 8 4.66663Z"
+          fill="white"
+        ></path>
+        <path
+          d="M8 11.3333C8.36819 11.3333 8.66667 11.0348 8.66667 10.6666C8.66667 10.2984 8.36819 9.99996 8 9.99996C7.63181 9.99996 7.33334 10.2984 7.33334 10.6666C7.33334 11.0348 7.63181 11.3333 8 11.3333Z"
+          fill="white"
+        ></path>
+      </g>
+      <defs>
+        <clipPath id="clip0_333_1864">
+          <rect width="16" height="16" fill="white"></rect>
+        </clipPath>
       </defs>
     </svg>
   );

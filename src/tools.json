@@ -64,5 +64,11 @@
     "name": "Webex",
     "img": "https://framerusercontent.com/images/u8c9OZARmnNRemwY72KsJqoWDRs.svg",
     "checked": false
+  },
+  {
+    "id": 12,
+    "name": "Outras",
+    "img": "https://framerusercontent.com/images/1MF4biUZPPHifqdE4a7ClXtOM.svg",
+    "checked": false
   }
 ]
