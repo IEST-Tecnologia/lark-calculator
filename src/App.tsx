@@ -301,6 +301,7 @@ function App() {
                       <a
                         className="self-stretch  font-medium text-base leading-6 text-center text-white rounded-full w-full"
                         href="https://iestgroup.larksuite.com/share/base/form/shruseb6ADHU8jd5GSJPD9b4tVe"
+                        target="_blank"
                       >
                         <p className="bg-gradient-to-r from-[#3370FF] to-[#4E83FD] py-3 px-2 lg:px-10 rounded-full">
                           Começe a economizar com Lark hoje.
